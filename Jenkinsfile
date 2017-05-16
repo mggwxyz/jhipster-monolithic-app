@@ -45,8 +45,8 @@ node {
 
     def dockerImage
     stage('build docker') {
-        bat "xcopy src/main/docker build/ /O /X /E /H /K"
-        bat "xcopy build/libs/*.war build/docker/ /O /X /E /H /K"
+        bat "xcopy src/main/docker/* build/ /e /i"
+        bat "xcopy build/libs/*.war build/docker/ /e /i"
         dockerImage = docker.build('todolist', 'build/docker')
     }
 
