@@ -6,21 +6,20 @@ node {
     }
 
     stage('check java') {
-        sh "java -version"
+        bat "java -version"
     }
 
     stage('clean') {
-        sh "chmod +x gradlew"
-        sh "./gradlew clean --no-daemon"
+        bat "./gradlew clean --no-daemon"
     }
 
     stage('install tools') {
-        sh "./gradlew yarn_install -PnodeInstall --no-daemon"
+        bat "./gradlew yarn_install -PnodeInstall --no-daemon"
     }
 
     stage('backend tests') {
         try {
-            sh "./gradlew test -PnodeInstall --no-daemon"
+            bat "./gradlew test -PnodeInstall --no-daemon"
         } catch(err) {
             throw err
         } finally {
@@ -30,7 +29,7 @@ node {
 
     stage('frontend tests') {
         try {
-            sh "./gradlew yarn_test -PnodeInstall --no-daemon"
+            bat "./gradlew yarn_test -PnodeInstall --no-daemon"
         } catch(err) {
             throw err
         } finally {
@@ -39,15 +38,15 @@ node {
     }
 
     stage('packaging') {
-        sh "./gradlew bootRepackage -x test -Pprod -PnodeInstall --no-daemon"
+        bat "./gradlew bootRepackage -x test -Pprod -PnodeInstall --no-daemon"
         archiveArtifacts artifacts: '**/build/libs/*.war', fingerprint: true
     }
 
 
     def dockerImage
     stage('build docker') {
-        sh "cp -R src/main/docker build/"
-        sh "cp build/libs/*.war build/docker/"
+        bat "cp -R src/main/docker build/"
+        bat "cp build/libs/*.war build/docker/"
         dockerImage = docker.build('todolist', 'build/docker')
     }
 
