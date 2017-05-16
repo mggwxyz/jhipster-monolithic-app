@@ -47,8 +47,8 @@ node {
     stage('build docker') {
         bat "xcopy src\\main\\docker\\* build\\ /e /i"
         bat "xcopy build\\libs\\*.war build\\docker\\ /e /i"
-        dockerImage = docker.build('todolist', 'build/docker')
-    }
+        echo "dir"
+        dockerImage = bat "docker build -t todolist:latest ."
 
     stage('publish docker') {
         docker.withRegistry('https://registry.hub.docker.com', 'mggwxyz') {
