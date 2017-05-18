@@ -1,0 +1,4 @@
+entity Task {
+	name String required maxlength(100),
+	description String maxlength(255)
+}
