@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { TranslateService } from 'ng2-translate';
 import { EventManager, AlertService } from 'ng-jhipster';
 import { Subscription } from 'rxjs/Rx';
 
@@ -16,7 +17,7 @@ export class JhiAlertErrorComponent implements OnDestroy {
     alerts: any[];
     cleanHttpErrorListener: Subscription;
 
-    constructor(private alertService: AlertService, private eventManager: EventManager) {
+    constructor(private alertService: AlertService, private eventManager: EventManager, private translateService: TranslateService) {
         this.alerts = [];
 
         this.cleanHttpErrorListener = eventManager.subscribe('todolistApp.httpError', (response) => {
@@ -44,7 +45,7 @@ export class JhiAlertErrorComponent implements OnDestroy {
                         entityKey = httpResponse.headers.get(headers[1]);
                     }
                     if (errorHeader) {
-                        const entityName = entityKey;
+                        const entityName = translateService.instant('global.menu.entities.' + entityKey);
                         this.addErrorAlert(errorHeader, errorHeader, { entityName });
                     } else if (httpResponse.text() !== '' && httpResponse.json() && httpResponse.json().fieldErrors) {
                         const fieldErrors = httpResponse.json().fieldErrors;
@@ -52,8 +53,8 @@ export class JhiAlertErrorComponent implements OnDestroy {
                             const fieldError = fieldErrors[i];
                             // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
                             const convertedField = fieldError.field.replace(/\[\d*\]/g, '[]');
-                            const fieldName = convertedField.charAt(0).toUpperCase() +
-                                convertedField.slice(1);
+                            const fieldName = translateService.instant('todolistApp.' +
+                                fieldError.objectName + '.' + convertedField);
                             this.addErrorAlert(
                                 'Field ' + fieldName + ' cannot be empty', 'error.' + fieldError.message, { fieldName });
                         }
@@ -86,11 +87,13 @@ export class JhiAlertErrorComponent implements OnDestroy {
     }
 
     addErrorAlert(message, key?, data?) {
+        key = key && key !== null ? key : message;
         this.alerts.push(
             this.alertService.addAlert(
                 {
                     type: 'danger',
-                    msg: message,
+                    msg: key,
+                    params: data,
                     timeout: 5000,
                     toast: this.alertService.isToast(),
                     scoped: true

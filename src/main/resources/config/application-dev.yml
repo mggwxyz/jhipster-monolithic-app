@@ -26,12 +26,15 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://localhost:5432/todolist
-        username: postgres
-        password: password
+        url: jdbc:h2:mem:todolist;DB_CLOSE_DELAY=-1
+        username: todolist
+        password:
+    h2:
+        console:
+            enabled: false
     jpa:
-        database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
-        database: POSTGRESQL
+        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+        database: H2
         show-sql: true
         properties:
             hibernate.id.new_generator_mappings: true
@@ -96,7 +99,7 @@ jhipster:
     security:
         remember-me:
             # security key (this key should be unique for your application, and kept secret)
-            key: e4bd2bb50cc94c2a75f848c88b0d779f8ee400df
+            key: 525aee90f6b65b490adea5479b046fe1a25407f4
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: todolist@localhost
         base-url: http://127.0.0.1:8080

@@ -44,14 +44,14 @@ export const userMgmtRoute: Routes = [
       'pagingParams': UserResolvePagingParams
     },
     data: {
-      pageTitle: 'Users'
+      pageTitle: 'userManagement.home.title'
     }
   },
   {
     path: 'user-management/:login',
     component: UserMgmtDetailComponent,
     data: {
-      pageTitle: 'Users'
+      pageTitle: 'userManagement.home.title'
     }
   }
 ];

@@ -42,7 +42,7 @@ public class CacheConfiguration {
             cm.createCache(todolist.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(todolist.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(todolist.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
-            cm.createCache(todolist.domain.Todo.class.getName(), jcacheConfiguration);
+            cm.createCache(todolist.domain.Task.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,4 +1,0 @@
-entity Todo {
-	title String,
-	description String
-}

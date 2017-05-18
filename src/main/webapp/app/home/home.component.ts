@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager} from 'ng-jhipster';
+import { EventManager, JhiLanguageService } from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
 
@@ -17,11 +17,13 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
 
     constructor(
+        private jhiLanguageService: JhiLanguageService,
         private principal: Principal,
         private loginModalService: LoginModalService,
         private eventManager: EventManager
     ) {
-        }
+        this.jhiLanguageService.setLocations(['home']);
+    }
 
     ngOnInit() {
         this.principal.identity().then((account) => {

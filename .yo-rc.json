@@ -1,7 +1,8 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "todolist"
+      "packageName": "todolist",
+      "nativeLanguage": "en"
     },
     "jhipsterVersion": "4.3.0",
     "baseName": "todolist",
@@ -13,22 +14,28 @@
     "clusteredHttpSession": false,
     "websocket": false,
     "databaseType": "sql",
-    "devDatabaseType": "postgresql",
+    "devDatabaseType": "h2Memory",
     "prodDatabaseType": "postgresql",
     "searchEngine": false,
     "messageBroker": false,
     "serviceDiscoveryType": false,
     "buildTool": "gradle",
     "enableSocialSignIn": false,
-    "rememberMeKey": "e4bd2bb50cc94c2a75f848c88b0d779f8ee400df",
+    "rememberMeKey": "525aee90f6b65b490adea5479b046fe1a25407f4",
     "clientFramework": "angular2",
-    "useSass": false,
+    "useSass": true,
     "clientPackageManager": "yarn",
     "applicationType": "monolith",
     "testFrameworks": [
+      "cucumber",
       "protractor"
     ],
     "jhiPrefix": "jhi",
-    "enableTranslation": false
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en",
+      "es"
+    ]
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { JhiLanguageService } from 'ng-jhipster';
 
 import { JhiMetricsMonitoringModalComponent } from './metrics-modal.component';
 import { JhiMetricsService } from './metrics.service';
@@ -16,11 +17,13 @@ export class JhiMetricsMonitoringComponent implements OnInit {
     JCACHE_KEY: string ;
 
     constructor(
+        private jhiLanguageService: JhiLanguageService,
         private modalService: NgbModal,
         private metricsService: JhiMetricsService
     ) {
         this.JCACHE_KEY = 'jcache.statistics';
-        }
+        this.jhiLanguageService.setLocations(['metrics']);
+    }
 
     ngOnInit() {
         this.refresh();

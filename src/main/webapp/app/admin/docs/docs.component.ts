@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { JhiLanguageService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-docs',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class JhiDocsComponent {
     constructor(
-        ) {
-        }
+        private jhiLanguageService: JhiLanguageService
+    ) {
+        this.jhiLanguageService.setLocations(['global']);
+    }
 }
